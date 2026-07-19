@@ -1,0 +1,37 @@
+name: Telegram Weather Bot
+
+on:
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create secrets file
+        run: |
+          echo "TOKEN=${{ secrets.TOKEN }}" > secrets.txt
+          echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> secrets.txt
+          echo "THREAD_ID=${{ secrets.THREAD_ID }}" >> secrets.txt
+
+      - name: Run bot
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          THREAD_ID: ${{ secrets.THREAD_ID }}
+        run: |
+          python weather.py --send
