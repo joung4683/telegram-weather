@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+
+<style>
+
+
+@import url(
+'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap'
+);
+
+
+
+* {
+
+box-sizing:border-box;
+
+}
+
+
+
+body {
+
+margin:0;
+
+width:1080px;
+
+height:1350px;
+
+
+font-family:
+'Noto Sans KR',
+sans-serif;
+
+
+background:
+
+        linear-gradient(
+        150deg,
+        #1E3A8A,
+        #60A5FA,
+        #DBEAFE
+        )
+        ;
+
+}
+
+
+
+.container {
+
+padding:65px 80px;
+
+}
+
+
+
+.top {
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:white;
+
+}
+
+
+
+.brand {
+
+font-size:28px;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+}
+
+
+
+.date {
+
+font-size:28px;
+
+font-weight:700;
+
+}
+
+
+
+.greeting {
+
+margin-top:65px;
+
+font-size:60px;
+
+font-weight:900;
+
+line-height:1.2;
+
+color:#16324F;
+
+}
+
+
+
+.subtitle {
+
+margin-top:12px;
+
+font-size:28px;
+
+font-weight:600;
+
+color:#526777;
+
+}
+
+
+
+.weather-card {
+
+margin-top:45px;
+
+
+height:760px;
+
+
+border-radius:65px;
+
+
+padding:55px;
+
+
+background:
+
+rgba(255,255,255,0.55);
+
+
+backdrop-filter:blur(20px);
+
+
+box-shadow:
+
+0 25px 70px rgba(0,0,0,0.15);
+
+}
+
+
+
+.icon {
+
+font-size:100px;
+
+text-align:center;
+
+}
+
+
+
+.temperature {
+
+margin-top:20px;
+
+
+text-align:center;
+
+
+font-size:170px;
+
+
+line-height:1;
+
+
+font-weight:900;
+
+
+letter-spacing:-8px;
+
+
+color:#1D4ED8;
+
+}
+
+
+
+.weather {
+
+margin-top:15px;
+
+text-align:center;
+
+
+font-size:45px;
+
+
+font-weight:900;
+
+color:#334155;
+
+}
+
+
+
+.message {
+
+margin-top:15px;
+
+text-align:center;
+
+
+font-size:28px;
+
+
+color:#64748B;
+
+}
+
+
+
+.divider {
+
+margin:55px 0 35px;
+
+
+height:2px;
+
+
+background:rgba(100,116,139,0.25);
+
+}
+
+
+
+.info {
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+
+gap:30px;
+
+}
+
+
+
+.info-box {
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+
+.label {
+
+font-size:26px;
+
+font-weight:700;
+
+color:#64748B;
+
+}
+
+
+
+.value {
+
+font-size:38px;
+
+font-weight:900;
+
+color:#0F172A;
+
+}
+
+
+
+.rain {
+
+margin-top:35px;
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+font-size:28px;
+
+
+font-weight:800;
+
+
+color:#2563EB;
+
+}
+
+
+
+.footer {
+
+margin-top:45px;
+
+
+text-align:center;
+
+
+font-size:25px;
+
+
+font-weight:800;
+
+
+color:white;
+
+
+letter-spacing:3px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+
+<div class="top">
+
+
+<div class="brand">
+
+제천 청년회
+
+</div>
+
+
+<div class="date">
+
+2026.07.18
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="greeting">
+
+좋은 아침입니다
+
+</div>
+
+
+
+<div class="subtitle">
+
+오늘 제천의 날씨입니다
+
+</div>
+
+
+
+
+<div class="weather-card">
+
+
+<div class="icon">
+
+🌧️
+
+</div>
+
+
+
+<div class="temperature">
+
+26.2°C
+
+</div>
+
+
+
+<div class="weather">
+
+비
+
+</div>
+
+
+
+<div class="message">
+
+오늘도 빛나는 하루가 되길 바랍니다
+
+</div>
+
+
+
+<div class="divider"></div>
+
+
+
+
+<div class="info">
+
+
+<div class="info-box">
+
+<div class="label">
+현재
+</div>
+
+<div class="value">
+26.2°C
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="label">
+체감
+</div>
+
+<div class="value">
+31.2°C
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="label">
+최고
+</div>
+
+<div class="value">
+26.4°C
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="label">
+최저
+</div>
+
+<div class="value">
+21.1°C
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="rain">
+
+<div>
+☔ 강수확률
+</div>
+
+<div>
+100%
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="footer">
+
+JECHEON YOUTH WEATHER
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>
+
