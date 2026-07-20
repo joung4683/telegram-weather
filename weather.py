@@ -1,10 +1,15 @@
-from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
-from weather_card import create_weather_card
-
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-
+import sys
+import asyncio
 import requests
+
+from telegram import Update
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ContextTypes,
+)
+
+from weather_card import create_weather_card
 
 
 TOKEN = "8058281661:AAFKDra1SZj_U1JXXqxRLHZ7Hpuid8IzCVY"
@@ -95,9 +100,6 @@ def get_weather_feature(temp, feel, rain, compare_text):
             "비교적 쾌적한 날씨로 활동하기 좋은 하루입니다.\n"
             "가벼운 산책과 야외 활동을 즐기기 좋은 날씨입니다."
         )
-
-
-
 def get_weather():
 
     url = (
@@ -127,7 +129,6 @@ def get_weather():
 
     feel = round(current["apparent_temperature"])
 
-
     weather_code = current["weather_code"]
 
 
@@ -147,6 +148,8 @@ def get_weather():
 
 
     rain = daily["precipitation_probability_max"][0]
+
+
     feel_diff = feel - yesterday_feel
 
 
@@ -169,7 +172,6 @@ def get_weather():
         )
 
 
-
     weather_text = (
         f"현재기온 : {temp}°\n"
         f"체감온도 : {feel}°\n"
@@ -177,7 +179,6 @@ def get_weather():
         f"최저기온 : {today_min}°\n"
         f"강수확률 : {rain}%"
     )
-
 
 
     feature = get_weather_feature(
@@ -188,13 +189,11 @@ def get_weather():
     )
 
 
-
     faith = get_faith_message(
         weather_code,
         temp,
         rain
     )
-
 
 
     return (
@@ -207,8 +206,6 @@ def get_weather():
         today_max,
         today_min
     )
-
-
 
 
 
@@ -226,7 +223,6 @@ async def send_weather_to_chat(app):
     ) = get_weather()
 
 
-
     image = await create_weather_card(
         weather_text,
         weather_code,
@@ -235,7 +231,6 @@ async def send_weather_to_chat(app):
         today_max,
         today_min
     )
-
 
 
     caption = (
@@ -247,21 +242,15 @@ async def send_weather_to_chat(app):
     )
 
 
-
     with open(image, "rb") as photo:
 
         await app.bot.send_photo(
-    chat_id=CHAT_ID,
-    message_thread_id=THREAD_ID,
-    photo=photo,
-    caption=caption,
-    parse_mode="HTML"
-)
-
-
-
-
-
+            chat_id=CHAT_ID,
+            message_thread_id=THREAD_ID,
+            photo=photo,
+            caption=caption,
+            parse_mode="HTML"
+        )
 async def weather_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
@@ -279,7 +268,6 @@ async def weather_command(
     ) = get_weather()
 
 
-
     image = await create_weather_card(
         weather_text,
         weather_code,
@@ -288,7 +276,6 @@ async def weather_command(
         today_max,
         today_min
     )
-
 
 
     caption = (
@@ -300,7 +287,6 @@ async def weather_command(
     )
 
 
-
     with open(image, "rb") as photo:
 
         await update.message.reply_photo(
@@ -308,8 +294,6 @@ async def weather_command(
             caption=caption,
             parse_mode="HTML"
         )
-
-
 
 
 
@@ -329,8 +313,6 @@ async def sendnow_command(
 
 
 
-
-
 async def chatid_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
@@ -339,8 +321,6 @@ async def chatid_command(
     await update.message.reply_text(
         f"Chat ID : {update.effective_chat.id}"
     )
-
-
 
 
 
@@ -354,12 +334,14 @@ async def start_command(
         "/weather - 현재 날씨 확인\n"
         "/sendnow - 활동공유방 테스트 전송"
     )
+
+
+
 def main():
 
     app = Application.builder().token(
         TOKEN
     ).build()
-
 
 
     app.add_handler(
@@ -370,14 +352,12 @@ def main():
     )
 
 
-
     app.add_handler(
         CommandHandler(
             "weather",
             weather_command
         )
     )
-
 
 
     app.add_handler(
@@ -388,7 +368,6 @@ def main():
     )
 
 
-
     app.add_handler(
         CommandHandler(
             "sendnow",
@@ -397,32 +376,17 @@ def main():
     )
 
 
+    if "--send" in sys.argv:
 
-    async def post_init(application):
-
-        scheduler = AsyncIOScheduler()
-
-
-        scheduler.add_job(
-            send_weather_to_chat,
-            "cron",
-            hour=8,
-            minute=0,
-            args=[application]
+        asyncio.run(
+            send_weather_to_chat(app)
         )
-
-
-        scheduler.start()
-
 
         print(
-            "⏰ 매일 오전 8시 자동 전송 예약 완료"
+            "✅ 날씨 전송 완료"
         )
 
-
-
-    app.post_init = post_init
-
+        return
 
 
     print(
@@ -430,10 +394,7 @@ def main():
     )
 
 
-
     app.run_polling()
-
-
 
 
 

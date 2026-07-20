@@ -22,12 +22,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Create secrets file
-        run: |
-          echo "TOKEN=${{ secrets.TOKEN }}" > secrets.txt
-          echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> secrets.txt
-          echo "THREAD_ID=${{ secrets.THREAD_ID }}" >> secrets.txt
-
       - name: Run bot
         env:
           TOKEN: ${{ secrets.TOKEN }}
