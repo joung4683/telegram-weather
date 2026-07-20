@@ -10,10 +10,27 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSET_DIR = os.path.join(BASE_DIR, "assets")
 
 
-FONT_REGULAR = r"C:\Users\joung\AppData\Local\Microsoft\Windows\Fonts\Pretendard-Regular.otf"
-FONT_MEDIUM = r"C:\Users\joung\AppData\Local\Microsoft\Windows\Fonts\Pretendard-Medium.otf"
-FONT_BOLD = r"C:\Users\joung\AppData\Local\Microsoft\Windows\Fonts\Pretendard-Bold.otf"
-FONT_EXTRA = r"C:\Users\joung\AppData\Local\Microsoft\Windows\Fonts\Pretendard-ExtraBold.otf"
+FONT_DIR = os.path.join(BASE_DIR, "fonts")
+
+FONT_REGULAR = os.path.join(
+    FONT_DIR,
+    "Pretendard-Regular.otf"
+)
+
+FONT_MEDIUM = os.path.join(
+    FONT_DIR,
+    "Pretendard-Medium.otf"
+)
+
+FONT_BOLD = os.path.join(
+    FONT_DIR,
+    "Pretendard-Bold.otf"
+)
+
+FONT_EXTRA = os.path.join(
+    FONT_DIR,
+    "Pretendard-ExtraBold.otf"
+)
 
 
 W = 1080
